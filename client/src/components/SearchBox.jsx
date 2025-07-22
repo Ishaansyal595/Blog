@@ -17,7 +17,7 @@ const SearchBox = ({ onSearch }) => {
       <Input
         placeholder="Search Blogs Here..."
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="h-9 rounded-full w-md flex justify-between items-center"
+        className="h-9 rounded-full w-full md:w-md flex justify-between items-center"
       />{" "}
       {/* <CiSearch /> */}
     </form>

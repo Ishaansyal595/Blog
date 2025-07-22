@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { getEnv } from "@/helpers/getEnv";
-import { CategoryDetailsRoute } from "@/helpers/RouteName";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 
@@ -64,10 +63,6 @@ const IndexPage = () => {
             </div>
           );
         })}
-      </div>
-
-      <div className="w-64 h-[300px] ml-5 border border-gray-300 rounded-md flex items-center justify-center bg-gray-100">
-        <h1 className="text-sm text-gray-600">Google Ad Placeholder</h1>
       </div>
     </div>
   );

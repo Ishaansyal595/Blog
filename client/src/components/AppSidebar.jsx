@@ -1,7 +1,6 @@
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarHeader,
@@ -9,12 +8,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo-white.png";
 import { IoHomeOutline } from "react-icons/io5";
 import { BiCategory } from "react-icons/bi";
 import { FaBlog, FaRegUserCircle } from "react-icons/fa";
-import { FaRegCommentDots } from "react-icons/fa";
 import { GoDot } from "react-icons/go";
 import {
   AllBlogRoute,
@@ -26,15 +24,14 @@ import { getEnv } from "@/helpers/getEnv";
 
 const AppSidebar = () => {
   const [categoryList, setCategoryList] = useState([]);
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
           `${getEnv("VITE_API_BASE_URL")}/public/category`
         );
-
         const data = await response.json();
-
         setCategoryList(data.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -44,14 +41,9 @@ const AppSidebar = () => {
   }, []);
 
   return (
-    <Sidebar>
+    <Sidebar className="h-full"> {/* ensure full height */}
       <SidebarHeader>
-        <img
-          src={logo}
-          alt="logo"
-          className="w-28
-        "
-        />
+        <img src={logo} alt="logo" className="w-28" />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -63,7 +55,6 @@ const AppSidebar = () => {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link to={AllBlogRoute}>
@@ -71,7 +62,6 @@ const AppSidebar = () => {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link to={AllCategoryRoute}>
@@ -79,15 +69,6 @@ const AppSidebar = () => {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-
-            {/* <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link to="/comments">
-                  <FaRegCommentDots /> Comments
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem> */}
-
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link to="/profile">
@@ -110,7 +91,6 @@ const AppSidebar = () => {
                       id: cat._id,
                     })}
                   >
-                    {" "}
                     <GoDot /> {cat.title}
                   </Link>
                 </SidebarMenuButton>
