@@ -21,9 +21,22 @@ const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
+
+const allowedOrigins = [
+  "https://blog-eta-five-81.vercel.app",
+  "https://blog-rust-nine-33.vercel.app",
+  "http://localhost:3000",
+];
+
 app.use(
   cors({
-    origin: frontend,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
